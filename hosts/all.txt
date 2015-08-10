@@ -1,0 +1,2 @@
+host1|host2|host3|
+#you HAVE to end the last SSH host with the `|` delimiter
