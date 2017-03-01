@@ -52,11 +52,11 @@ if [ ! -f $typeHost ]; then
     fi
 fi
 
-if [ "$typeExec" = "" ] || [ "$typeExec" = "1" ]; then
-    typeExec=1
-    echo "***Executing parallely"
-else
+if [ "$typeExec" = "" ] || [ "$typeExec" = "0" ]; then
+    typeExec=0
     echo "***Executing sequentially"
+else
+    echo "***Executing parallely"
 fi
 
 #Read the commands
