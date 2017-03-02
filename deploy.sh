@@ -48,7 +48,7 @@ if [ ! -f $typeHost ]; then
         typeHost="$1|"
         echo "Host file $typeHost not found, using $typeHost as host"
     else
-        typeHost=$typeHost2
+        typeHost < $typeHost2
     fi
 fi
 
@@ -63,7 +63,7 @@ fi
 cmd="`cat $typeDeploy`"
 
 COUNTER=0
-while read -d "|"  line
+while read -d "|" line
 do
     COUNTER=$((COUNTER + 1))
     if [ "$typeExec" == "1" ]; then
@@ -72,7 +72,7 @@ do
         source $typeDeploy  < /dev/tty
     fi
 
-done < "$typeHost"
+done <<< "$typeHost"
 wait
 
 exit
