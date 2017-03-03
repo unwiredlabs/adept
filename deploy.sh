@@ -48,8 +48,10 @@ if [ ! -f $typeHost ]; then
         typeHost="$1|"
         echo "Host file $typeHost not found, using $typeHost as host"
     else
-        typeHost < $typeHost2
+        typeHost=$(<$typeHost2)
     fi
+else 
+  typeHost=$(<$typeHost)
 fi
 
 if [ "$typeExec" = "" ] || [ "$typeExec" = "0" ]; then
