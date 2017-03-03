@@ -48,22 +48,24 @@ if [ ! -f $typeHost ]; then
         typeHost="$1|"
         echo "Host file $typeHost not found, using $typeHost as host"
     else
-        typeHost=$typeHost2
+        typeHost=$(<$typeHost2)
     fi
+else 
+  typeHost=$(<$typeHost)
 fi
 
-if [ "$typeExec" = "" ] || [ "$typeExec" = "1" ]; then
-    typeExec=1
-    echo "***Executing parallely"
-else
+if [ "$typeExec" = "" ] || [ "$typeExec" = "0" ]; then
+    typeExec=0
     echo "***Executing sequentially"
+else
+    echo "***Executing parallely"
 fi
 
 #Read the commands
 cmd="`cat $typeDeploy`"
 
 COUNTER=0
-while read -d "|"  line
+while read -d "|" line
 do
     COUNTER=$((COUNTER + 1))
     if [ "$typeExec" == "1" ]; then
@@ -72,7 +74,7 @@ do
         source $typeDeploy  < /dev/tty
     fi
 
-done < "$typeHost"
+done <<< "$typeHost"
 wait
 
 exit
